@@ -1,0 +1,21 @@
+tomcat --> allocation 
+
+
+request --> tomcat --> DispatcherServlet --> redirect --> ioc container 
+
+
+
+
+
+create maven webapp 
+
+in pom.xml add 
+		1) spring core , context ,bean , el , web-mvc [ single spring web-mvc ] 
+		2) web.xml -> mapping -> DispatcherServlet --> request --> IoC Container
+		3) IoC -> spring.xml  
+			context 
+			aop
+			mvc 
+			
+		3.1) mvc:annotation-driven , context:componentscan , views 
+			
