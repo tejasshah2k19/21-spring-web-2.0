@@ -4,10 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Signup</title>
 </head>
 <body>
 
-	<h2>Calc</h2>
+
+	<form action="saveuser" method="post">
+
+		FirstName : <input type="text" name="firstName" /><br> Email : <input
+			type="text" name="email" /><br> Password : <input
+			type="password" name="password" /> <br> <input type="submit"
+			value="Signup" />
+
+
+	</form>
 
 
 </body>
