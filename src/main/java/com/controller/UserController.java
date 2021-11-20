@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.bean.CalcBean;
 import com.bean.UserBean;
 
 @Controller
@@ -39,8 +40,24 @@ public class UserController {
 		// request.set -->fn em pass
 		// request dispatcher
 
-		model.addAttribute("user", user);//set 
+		model.addAttribute("user", user);// set
 
-		return "PrintInfo";//rd 
+		return "PrintInfo";// rd
 	}
+
+	@PostMapping("/addition")
+	public String addition(CalcBean calc, Model model) {
+
+		if (calc.getChoice().equals("add"))
+			model.addAttribute("ans", calc.getN1() + calc.getN2());
+		else if (calc.getChoice().equals("sub"))
+			model.addAttribute("ans", calc.getN1() - calc.getN2());
+		else if (calc.getChoice().equals("mul"))
+			model.addAttribute("ans", calc.getN1() * calc.getN2());
+		else
+			model.addAttribute("ans", calc.getN1() + calc.getN2());
+
+		return "Ans";
+	}
+
 }

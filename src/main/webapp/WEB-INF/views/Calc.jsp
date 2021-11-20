@@ -9,6 +9,21 @@
 
 	<h2>Calc</h2>
 
-
+	<form action="addition" method="post">
+		No.1 <input type="text" name="n1"/>
+		<br>
+		No.2 <input type="text" name="n2"/>
+		<bR>
+		
+		Add <input type="radio" name="choice" value="add">
+		Sub <input type="radio" name="choice" value="sub" >
+		Mul <input type="radio" name="choice" value="mul" >
+		
+		
+		<br>
+		<input type="submit" value="Addition"/>
+		
+	
+	</form>
 </body>
 </html>
