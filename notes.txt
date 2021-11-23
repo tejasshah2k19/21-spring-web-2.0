@@ -25,3 +25,24 @@ in pom.xml add
 jsp/servlet --> we have to create independant servlet for each features 
 	
 1 controller --> multiple action
+
+------------------------------------------------
+hibernate-validator.jar 
+	annotations 
+			@NotNull
+			@Blank
+			@Min
+			@Max 
+			
+
+
+
+
+
+
+
+
+
+
+
+
