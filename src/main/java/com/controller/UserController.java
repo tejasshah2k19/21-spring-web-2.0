@@ -1,5 +1,6 @@
 package com.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,9 +8,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.bean.CalcBean;
 import com.bean.UserBean;
+import com.dao.UserDao;
 
 @Controller
 public class UserController {
+	@Autowired
+	UserDao userDao;
+
 	@GetMapping("/home")
 	public String home() {
 		return "Home";
@@ -40,6 +45,8 @@ public class UserController {
 		// request.set -->fn em pass
 		// request dispatcher
 
+		// dao --> insert
+		userDao.addUser(user);
 		model.addAttribute("user", user);// set
 
 		return "PrintInfo";// rd
@@ -60,4 +67,11 @@ public class UserController {
 		return "Ans";
 	}
 
+	@GetMapping("/listusers")
+	public String listUsers(Model model) {
+		model.addAttribute("users",userDao.getAllUsers());
+		return "ListUsers";
+	}
+	
+	
 }

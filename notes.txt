@@ -33,8 +33,11 @@ hibernate-validator.jar
 			@Blank
 			@Min
 			@Max 
-			
+------------------------------------------------
+in memory CRUD 
 
+------------------------------------------------
+spring web - db connection 
 
 
 

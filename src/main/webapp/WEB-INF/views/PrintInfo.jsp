@@ -12,5 +12,9 @@
  Email : ${user.email }
  <br>
  Password : ${user.password }
+
+
+	<br>
+	<a href="listusers">List aLL Users</a>
 </body>
 </html>
