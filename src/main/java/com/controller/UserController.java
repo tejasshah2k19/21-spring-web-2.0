@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bean.CalcBean;
 import com.bean.UserBean;
@@ -69,9 +70,27 @@ public class UserController {
 
 	@GetMapping("/listusers")
 	public String listUsers(Model model) {
-		model.addAttribute("users",userDao.getAllUsers());
+		model.addAttribute("users", userDao.getAllUsers());
 		return "ListUsers";
 	}
+
+	@GetMapping("/deleteuser")
+	public String deleteUser(@RequestParam("userId") int userId) {
+		userDao.deleteUser(userId);
+		
+		return "redirect:/listusers";//listusers url
+	}
+	@GetMapping("/viewuser")
+	public String viewUser(@RequestParam("userId") int userId,Model model) {
+		 UserBean user = userDao.getUserById(userId);
+		 model.addAttribute("user",user);
+		 return "ViewUser";
 	
-	
+	}
+
 }
+
+
+
+
+

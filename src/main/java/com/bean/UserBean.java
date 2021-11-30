@@ -2,15 +2,14 @@ package com.bean;
 
 public class UserBean {
 
-	
 	int userId;
 	String firstName, email, password;
 
 	public UserBean() {
 
-		this.userId = (int)(Math.random()*10000);
+		this.userId = (int) (Math.random() * 10000);
 	}
-	
+
 	public int getUserId() {
 		return userId;
 	}

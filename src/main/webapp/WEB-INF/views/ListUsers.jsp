@@ -12,14 +12,17 @@
 <title>List Users</title>
 </head>
 <body>
-<a href="signup">Add User</a>
-<br><br>
+	<a href="signup">Add User</a>
+	<br>
+	<br>
 	<table border="1">
 		<tr>
 			<th>UserId</th>
 			<th>FirstName</th>
 			<th>Email</th>
 			<th>Password</th>
+
+			<TH>Action</TH>
 		</tr>
 
 		<c:forEach items="${users}" var="user">
@@ -28,6 +31,9 @@
 				<td>${user.firstName }</td>
 				<td>${user.email }</td>
 				<td>${user.password }</td>
+				<td><a href="deleteuser?userId=${user.userId}">Delete</a>  |  
+					<a href="viewuser?userId=${user.userId }">View</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
