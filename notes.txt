@@ -39,8 +39,19 @@ in memory CRUD
 ------------------------------------------------
 spring web - db connection 
 
+------------------------------------------------
+spring -> file uploading 
 
-
+1) pom.xml --> commons -> io and file upload 
+2) spring.xml --> configuration -->   
+   	<bean
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		id="multipartResolver">
+		<property name="maxUploadSize" value="5500000"></property>
+	</bean>
+   
+3) controller -> logic 
+	 
 
 
 

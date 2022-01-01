@@ -1,11 +1,16 @@
 package com.controller;
 
+import java.io.File;
+import java.util.ArrayList;
+
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bean.CalcBean;
 import com.bean.UserBean;
@@ -77,20 +82,73 @@ public class UserController {
 	@GetMapping("/deleteuser")
 	public String deleteUser(@RequestParam("userId") int userId) {
 		userDao.deleteUser(userId);
-		
-		return "redirect:/listusers";//listusers url
+
+		return "redirect:/listusers";// listusers url
 	}
+
 	@GetMapping("/viewuser")
-	public String viewUser(@RequestParam("userId") int userId,Model model) {
-		 UserBean user = userDao.getUserById(userId);
-		 model.addAttribute("user",user);
-		 return "ViewUser";
-	
+	public String viewUser(@RequestParam("userId") int userId, Model model) {
+		UserBean user = userDao.getUserById(userId);
+		model.addAttribute("user", user);
+		return "ViewUser";
+
+	}
+
+	@GetMapping("/edituser")
+	public String editUser(@RequestParam("userId") int userId, Model model) {
+		UserBean user = userDao.getUserById(userId);
+		model.addAttribute("user", user);
+		return "EditUser";
+	}
+
+	@PostMapping("/updateuser")
+	public String updateUser(UserBean user) {
+
+		userDao.updateUser(user);
+
+		return "redirect:/listusers";
+	}
+
+	@GetMapping("/searchuser")
+	public String searchUser() {
+		return "SearchUser";
+	}
+
+	@GetMapping("/search")
+	public String search(@RequestParam("firstName") String firstName, Model model) {
+
+		ArrayList<UserBean> users = userDao.searchUserByFirstName(firstName);
+		model.addAttribute("users", users);
+		return "ListUsers";
+	}
+
+	@GetMapping("/newprofile")
+	public String newProfile() {
+
+		return "NewProfile";
+	}
+
+	@PostMapping("/uploadprofile")
+
+	public String uploadProfile(@RequestParam("profile") MultipartFile file) {
+
+		System.out.println(file.getOriginalFilename());// 3.jpg
+
+		try {
+			
+			
+			File f = new File(
+					"D:\\Tejas Shah\\Dropbox\\Tejas Shah's Workplace\\work\\21-spring-web-2.0\\src\\main\\webapp\\resources\\images\\",
+					file.getOriginalFilename());
+		     f.createNewFile();//
+             FileUtils.writeByteArrayToFile(f, file.getBytes());
+             
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("file upload done");
+		return "NewProfile";
 	}
 
 }
-
-
-
-
-

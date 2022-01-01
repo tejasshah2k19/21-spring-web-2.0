@@ -12,7 +12,8 @@
 <title>List Users</title>
 </head>
 <body>
-	<a href="signup">Add User</a>
+	<a href="signup">Add User</a> |
+	 <a href="searchuser">Search</a>
 	<br>
 	<br>
 	<table border="1">
@@ -21,7 +22,6 @@
 			<th>FirstName</th>
 			<th>Email</th>
 			<th>Password</th>
-
 			<TH>Action</TH>
 		</tr>
 
@@ -31,9 +31,9 @@
 				<td>${user.firstName }</td>
 				<td>${user.email }</td>
 				<td>${user.password }</td>
-				<td><a href="deleteuser?userId=${user.userId}">Delete</a>  |  
-					<a href="viewuser?userId=${user.userId }">View</a>
-				</td>
+				<td><a href="deleteuser?userId=${user.userId}">Delete</a> | <a
+					href="viewuser?userId=${user.userId }">View</a> | <a
+					href="edituser?userId=${user.userId }">Edit</a></td>
 			</tr>
 		</c:forEach>
 	</table>
