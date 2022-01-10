@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bean.CalcBean;
+import com.bean.EmployeeBean;
 import com.bean.UserBean;
 import com.dao.UserDao;
 
@@ -122,6 +123,12 @@ public class UserController {
 		return "ListUsers";
 	}
 
+	@GetMapping("/newprofile2")
+	public String newProfile2() {
+
+		return "NewProfile2";
+	}
+
 	@GetMapping("/newprofile")
 	public String newProfile() {
 
@@ -129,20 +136,48 @@ public class UserController {
 	}
 
 	@PostMapping("/uploadprofile")
-
 	public String uploadProfile(@RequestParam("profile") MultipartFile file) {
 
 		System.out.println(file.getOriginalFilename());// 3.jpg
 
 		try {
-			
-			
+
 			File f = new File(
 					"D:\\Tejas Shah\\Dropbox\\Tejas Shah's Workplace\\work\\21-spring-web-2.0\\src\\main\\webapp\\resources\\images\\",
 					file.getOriginalFilename());
-		     f.createNewFile();//
-             FileUtils.writeByteArrayToFile(f, file.getBytes());
-             
+			f.createNewFile();//
+			FileUtils.writeByteArrayToFile(f, file.getBytes());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("file upload done");
+		return "NewProfile";
+	}
+
+	@PostMapping("/uploadprofile2")
+	public String uploadProfile2(UserBean user) {
+
+		MultipartFile file = user.getProfile();
+		System.out.println(file.getOriginalFilename());// 3.jpg
+
+	
+		user.setProfilePath("resources//images//"+user.getEmail()+"//"+file.getOriginalFilename());
+		
+		userDao.addUser(user);// insert
+
+		try {
+
+			File myDir = new File(
+					"D:\\Tejas Shah\\Dropbox\\Tejas Shah's Workplace\\work\\21-spring-web-2.0\\src\\main\\webapp\\resources\\images\\"
+							+ user.getEmail());
+			myDir.mkdir(); // images\\tejas@gmail.com\\
+
+			File f = new File(myDir, file.getOriginalFilename());
+			f.createNewFile();//
+			FileUtils.writeByteArrayToFile(f, file.getBytes());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

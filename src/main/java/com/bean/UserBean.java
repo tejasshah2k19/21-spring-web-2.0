@@ -1,9 +1,31 @@
 package com.bean;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class UserBean {
 
 	int userId;
 	String firstName, email, password;
+	MultipartFile profile;
+	String profilePath; 
+	
+
+
+	public String getProfilePath() {
+		return profilePath;
+	}
+
+	public void setProfilePath(String profilePath) {
+		this.profilePath = profilePath;
+	}
+
+	public MultipartFile getProfile() {
+	return profile;
+}
+
+public void setProfile(MultipartFile profile) {
+	this.profile = profile;
+}
 
 	public UserBean() {
 
