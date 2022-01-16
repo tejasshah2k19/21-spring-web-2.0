@@ -53,6 +53,53 @@ spring -> file uploading
 3) controller -> logic 
 	 
 
+------------------------------------------------
+
+encType -> form data -> how encode and server send 
+
+method="post" -> file
+encType 
+	=> www-form-urlencoded [ tejas = tejas ]
+						   [ tejas shah , tejas+shah] 
+							
+	=> multipart/form-data [ file upload ] 
+
+  
+------------------------------------------------
+
+
+db connection ->
+		db drive 
+
+Connection
+PreparedStatement 
+		spring jdbc
+	
+
+obtain connection --> no class 
+		spring.xml 
+			bean -> configure 
+------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
