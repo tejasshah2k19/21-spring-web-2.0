@@ -1,9 +1,13 @@
 package com.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bean.VendorBean;
 import com.dao.VendorDao;
@@ -27,4 +31,23 @@ public class VendorController {
 		return "Home";
 	}
 
+	// list vendors
+
+	@GetMapping("/listvendor")
+	public String listVendor(Model model) {
+
+		List<VendorBean> vendors = vendorDao.getAllVendors();
+		model.addAttribute("vendors",vendors);
+		
+		return "ListVendors";
+	}
+
+	@GetMapping("/deletevendor")
+	public String deleteVendor(@RequestParam("vendorId") int vendorId) {
+		
+		vendorDao.deleteVendor(vendorId);
+		
+		return "redirect:/listvendor";//this will not open jsp this will redirect you to another url
+	}
+	
 }

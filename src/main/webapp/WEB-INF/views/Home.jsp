@@ -7,6 +7,9 @@
 <title>Home</title>
 </head>
 <body>
-Home..   
+Home.. 
+
+<a href="newvendor">Add Vendor</a><br><Br>
+<a href="listvendor">List Vendor</a>  
 </body>
 </html>
