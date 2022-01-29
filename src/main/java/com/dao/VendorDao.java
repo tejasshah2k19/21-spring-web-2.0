@@ -24,12 +24,26 @@ public class VendorDao {
 				vendor.getPassword());
 	}
 
-	public List<VendorBean> getAllVendors(){
-		
+	public List<VendorBean> getAllVendors() {
+
 		return stmt.query("select * from vendor", new BeanPropertyRowMapper<VendorBean>(VendorBean.class));
-		
+
 	}
-	public  void deleteVendor(int vendorId) {
-		stmt.update("delete from vendor where vendorid = ?",vendorId);
+
+	public void deleteVendor(int vendorId) {
+		stmt.update("delete from vendor where vendorid = ?", vendorId);
+	}
+
+	public VendorBean getVendorById(int vendorId) {
+
+		return stmt.queryForObject("select * from vendor where vendorId = ?", new Object[] { vendorId },
+				new BeanPropertyRowMapper<VendorBean>(VendorBean.class));
+
+	}
+
+	public void updateVendor(VendorBean vendorBean) {
+		stmt.update("update vendor set name = ? , email = ? , password = ?  where vendorId = ?", vendorBean.getName(),
+				vendorBean.getEmail(), vendorBean.getPassword(), vendorBean.getVendorId());
+
 	}
 }
