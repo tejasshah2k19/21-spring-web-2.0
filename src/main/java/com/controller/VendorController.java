@@ -3,6 +3,7 @@ package com.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +19,49 @@ public class VendorController {
 	@Autowired
 	VendorDao vendorDao;
 
+	@Autowired
+	BCryptPasswordEncoder bcrypt;
+
 	// jsp open
 	@GetMapping("/newvendor")
 	public String newVendor() {
 		return "NewVendor";
 	}
 
+	@GetMapping("/vendorlogin")
+	public String vendorLogin() {
+		return "VendorLogin";
+	}
+
+	@PostMapping("/vendorauthenticate")
+	public String vendorAuthenticate(VendorBean vendorBean, Model model) {
+
+		VendorBean dbVendorBean = vendorDao.getVendorByEmail(vendorBean.getEmail());
+
+		if (dbVendorBean == null) {
+			model.addAttribute("msg", "Invalid Credentials");
+			return "VendorLogin";
+		} else {
+
+			if (bcrypt.matches(vendorBean.getPassword(), dbVendorBean.getPassword())) {
+				return "Home";
+			} else {
+
+				model.addAttribute("msg", "Invalid Credentials");
+				return "VendorLogin";
+			}
+
+		}
+
+	}
+
 	// save
 	@PostMapping("/savevendor")
 	public String saveVendor(VendorBean vendor) {
+		// vendor->plain text
+
+		String enc = bcrypt.encode(vendor.getPassword());
+		vendor.setPassword(enc);
 		vendorDao.insertVendor(vendor);
 		return "Home";
 	}

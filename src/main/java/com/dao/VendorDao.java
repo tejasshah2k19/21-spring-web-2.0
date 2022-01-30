@@ -46,4 +46,14 @@ public class VendorDao {
 				vendorBean.getEmail(), vendorBean.getPassword(), vendorBean.getVendorId());
 
 	}
+
+	public VendorBean getVendorByEmail(String email) {
+
+		try {
+			return stmt.queryForObject("select * from vendor where email = ?", new Object[] { email },
+					new BeanPropertyRowMapper<VendorBean>(VendorBean.class));
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }

@@ -80,6 +80,12 @@ obtain connection --> no class
 		spring.xml 
 			bean -> configure 
 ------------------------------------------------
+password encoder 
+
+Bcrypt 
+
+
+admin -->  
 
 
 
